@@ -1,4 +1,4 @@
-package OpModes.Autos;
+package OpModes.Autos.Specimen;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.pedropathing.follower.Follower;
@@ -6,29 +6,27 @@ import com.pedropathing.localization.Pose;
 import com.pedropathing.pathgen.BezierCurve;
 import com.pedropathing.pathgen.BezierLine;
 import com.pedropathing.pathgen.Path;
-import com.pedropathing.pathgen.PathChain;
 import com.pedropathing.pathgen.Point;
+import com.pedropathing.pathgen.PathChain;
 import com.pedropathing.util.Timer;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-
-
 import Common.Robot.IntakeOuttakeV2;
+
 
 
 @Autonomous
 @Config
-public class Copy1 extends OpMode {
+public class fiveSpecimenAuto extends OpMode {
     private Timer pathTimer;
     private int pathState;
     private Follower follower;
     private Path cyclePos, push1;
     private PathChain samplePush1, goBack1, samplePush2, goBack2, samplePush3, preload, eat1, hang1, eat2, hang2, eat3, hang3, eat4, hang4, park;
     private final Pose startPose = new Pose(6.7291,67.9626,Math.toRadians(0));//x was 6.7291
-    private final Pose scorePose = new Pose(40.3738-2,67.9626+.5,Math.toRadians(0));
+    private final Pose scorePose = new Pose(40.3738-2.25,67.9626+.5,Math.toRadians(0));
 
     private final Pose sample1 = new Pose(60.1121-1-2,30.9533+.5,Math.toRadians(180));//was x=66.8411, y=25.7944; then 65.7196,28.4861, then (61.9065,31.4019)
     private final Pose sample1Control = new Pose(5.8318,48.6729,Math.toRadians(180));//was 2.6916,53.1589
@@ -36,19 +34,19 @@ public class Copy1 extends OpMode {
     private final Pose sample2 = new Pose(57.4206-2.25-2.5, 18.1682+1.75, Math.toRadians(180));//was x=68.6355, y=23.3271, then (77.3832, 24.8972), then 69.0841, 20.8598, then (61.0093, 18.3925), then (62.1308, 14.3551), then (60.1121, 17.4953)
     private final Pose sample2Control = new Pose(54.9533,42.8411,Math.toRadians(180));//was (71.9999,35.6636), then (60.3364,32.9720), then (59.9495,39.5215), then (61.9065,43.2897)
     private final Pose observation2 = new Pose(9.8692+2+6, 13.0093, Math.toRadians(180));//was (10.5421, 10.7664)
-    private final Pose sample3 = new Pose(57.4206-3.225-1, 10.9907+2.5, Math.toRadians(180)); //was (x,y)(71.3271, 9.1963), then (71.1028, 10.9907), then (62.8037, 9.4206), then (59.8879, 9.8692), then (59.43925, 10.5421)
+    private final Pose sample3 = new Pose(57.4206-3.225-1, 10.9907+5, Math.toRadians(180)); //was (x,y)(71.3271, 9.1963), then (71.1028, 10.9907), then (62.8037, 9.4206), then (59.8879, 9.8692), then (59.43925, 10.5421)
     private final Pose sample3Control = new Pose(57.1963,25.7944+9,Math.toRadians(180));//was (80.0748,24.4486)
     private final Pose observation3 = new Pose(8.9720+8,10.9907,Math.toRadians(180)); //was (x,y) (9.8692,8.2991), then (10.7664,9.4206), then (10.0935,9.1963)
     //private final Pose geraldPickup = new Pose(10,24,Math.toRadians(180));
     private final Pose eatPose = new Pose(7+2,24+8,Math.toRadians(180));//was 180
     private final Pose eatPose3 = new Pose(7+2,24+8,Math.toRadians(180));//was 180
     private final Pose eatPoseControl = new Pose(27.5,18.8,Math.toRadians(180));
-    private final Pose specimen1 = new Pose(40.374-3.5-4,70+9,Math.toRadians(180));
+    private final Pose specimen1 = new Pose(40.374-3.5-5.5,70+9,Math.toRadians(180));
     private final Pose specimen1Control = new Pose(33.87,89.72,Math.toRadians(0));
     private final Pose specimen1Control2 = new Pose(17.05, 84.79, Math.toRadians(0));
-    private final Pose specimen2 = new Pose(40.375-6.25-1.5  ,66+10,Math.toRadians(180));
-    private final Pose specimen3 = new Pose(40.375-3.5-4,61+5,Math.toRadians(180));
-    private final Pose specimen4 = new Pose(40.375-3.5-2,58+7,Math.toRadians(180));
+    private final Pose specimen2 = new Pose(40.375-6.25-3.5  ,66+10,Math.toRadians(180));
+    private final Pose specimen3 = new Pose(40.375-3.5-6,61+5,Math.toRadians(180));
+    private final Pose specimen4 = new Pose(40.375-3.5-3.25,58+7,Math.toRadians(180));
 
 
     IntakeOuttakeV2 jamocha = new IntakeOuttakeV2();
@@ -94,7 +92,7 @@ public class Copy1 extends OpMode {
                 .build();
 
         eat1 = follower.pathBuilder()
-                .addPath(new BezierCurve(new Point(observation3), new Point(eatPoseControl), new Point(eatPose.getX()-1.5, eatPose.getY()-2)))
+                .addPath(new BezierCurve(new Point(observation3), new Point(eatPoseControl), new Point(eatPose.getX()-3, eatPose.getY()-2)))
                 .setConstantHeadingInterpolation(observation3.getHeading())
                 .build();
 
@@ -109,7 +107,7 @@ public class Copy1 extends OpMode {
                 .build();
 
         eat2 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(specimen1), new Point(eatPose.getX()-1, eatPose.getY()-1)))
+                .addPath(new BezierLine(new Point(specimen1), new Point(eatPose.getX()-1.5, eatPose.getY()-1)))
                 .setConstantHeadingInterpolation(specimen1.getHeading())
                 .setPathEndTimeoutConstraint(125)
                 .build();
@@ -158,26 +156,20 @@ public class Copy1 extends OpMode {
                 setPathState(1000);
                 break;
             case 1000:
-                follower.setMaxPower(0.6);
+                //follower.setMaxPower(0.85);
                 follower.followPath(preload, true);
                 setPathState(10000);
                 break;
             case 10000:
-                if (follower.getCurrentTValue()>.01){
-                    jamocha.liftAutoHighChamber();
+                if (follower.getCurrentTValue()>.1){
+                    jamocha.liftHighChamber();
                     setPathState(100);
                 }
                 break;
             case 100:
                 if(!follower.isBusy()){
-                    //jamocha.armHorizontal();
-                    //jamocha.liftStowed();
-                    setPathState(10001);
-                }
-                break;
-            case 10001:
-                if (pathTimer.getElapsedTimeSeconds()>.3){
                     jamocha.armHorizontal();
+                    //jamocha.liftStowed();
                     setPathState(101);
                 }
                 break;
@@ -192,7 +184,7 @@ public class Copy1 extends OpMode {
                 break;
             case 1:
                 if(!follower.isBusy()){
-                    follower.setMaxPower(1);
+                    //follower.setMaxPower(0.95);
                     follower.followPath(push1);
                     setPathState(2);
                 }
@@ -220,7 +212,7 @@ public class Copy1 extends OpMode {
                 break;
             case 4:
                 if(!follower.isBusy()){
-                    //follower.setMaxPower(0.90);
+                    follower.setMaxPower(0.90);
                     follower.followPath(samplePush2);
                     setPathState(5);
                 }
@@ -550,6 +542,5 @@ public class Copy1 extends OpMode {
         setPathState(0);
     }
 }
-
 
 

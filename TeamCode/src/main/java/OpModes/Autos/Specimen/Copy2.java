@@ -1,4 +1,4 @@
-package OpModes.Autos;
+package OpModes.Autos.Specimen;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.pedropathing.follower.Follower;
@@ -6,10 +6,9 @@ import com.pedropathing.localization.Pose;
 import com.pedropathing.pathgen.BezierCurve;
 import com.pedropathing.pathgen.BezierLine;
 import com.pedropathing.pathgen.Path;
-import com.pedropathing.pathgen.Point;
 import com.pedropathing.pathgen.PathChain;
+import com.pedropathing.pathgen.Point;
 import com.pedropathing.util.Timer;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -17,10 +16,10 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import Common.Robot.IntakeOuttakeV2;
 
 
-
 @Autonomous
 @Config
-public class MochiesSpecimenAuto extends OpMode {
+//@Disabled
+public class Copy2 extends OpMode {
     private Timer pathTimer;
     private int pathState;
     private Follower follower;
@@ -35,19 +34,19 @@ public class MochiesSpecimenAuto extends OpMode {
     private final Pose sample2 = new Pose(57.4206-2.25-2.5, 18.1682+1.75, Math.toRadians(180));//was x=68.6355, y=23.3271, then (77.3832, 24.8972), then 69.0841, 20.8598, then (61.0093, 18.3925), then (62.1308, 14.3551), then (60.1121, 17.4953)
     private final Pose sample2Control = new Pose(54.9533,42.8411,Math.toRadians(180));//was (71.9999,35.6636), then (60.3364,32.9720), then (59.9495,39.5215), then (61.9065,43.2897)
     private final Pose observation2 = new Pose(9.8692+2+6, 13.0093, Math.toRadians(180));//was (10.5421, 10.7664)
-    private final Pose sample3 = new Pose(57.4206-3.225-1, 10.9907+5.25, Math.toRadians(175+3+1)); //was (x,y)(71.3271, 9.1963), then (71.1028, 10.9907), then (62.8037, 9.4206), then (59.8879, 9.8692), then (59.43925, 10.5421)
+    private final Pose sample3 = new Pose(57.4206-3.225-1, 10.9907+5, Math.toRadians(180)); //was (x,y)(71.3271, 9.1963), then (71.1028, 10.9907), then (62.8037, 9.4206), then (59.8879, 9.8692), then (59.43925, 10.5421)
     private final Pose sample3Control = new Pose(57.1963,25.7944+9,Math.toRadians(180));//was (80.0748,24.4486)
     private final Pose observation3 = new Pose(8.9720+8,10.9907,Math.toRadians(180)); //was (x,y) (9.8692,8.2991), then (10.7664,9.4206), then (10.0935,9.1963)
     //private final Pose geraldPickup = new Pose(10,24,Math.toRadians(180));
-    private final Pose eatPose = new Pose(7+2,24+8,Math.toRadians(170));//was 180
-    private final Pose eatPose3 = new Pose(7+2,24+8,Math.toRadians(170+3));//was 180
+    private final Pose eatPose = new Pose(7+2,24+8,Math.toRadians(180));//was 180
+    private final Pose eatPose3 = new Pose(7+2,24+8,Math.toRadians(180));//was 180
     private final Pose eatPoseControl = new Pose(27.5,18.8,Math.toRadians(180));
-    private final Pose specimen1 = new Pose(40.374-3.5-7.5,70+9,Math.toRadians(180));
+    private final Pose specimen1 = new Pose(40.374-3.5-5.5,70+9,Math.toRadians(180));
     private final Pose specimen1Control = new Pose(33.87,89.72,Math.toRadians(0));
     private final Pose specimen1Control2 = new Pose(17.05, 84.79, Math.toRadians(0));
-    private final Pose specimen2 = new Pose(40.375-6.25-5.5  ,66+10,Math.toRadians(180));
-    private final Pose specimen3 = new Pose(40.375-3.5-8,61+5,Math.toRadians(180));
-    private final Pose specimen4 = new Pose(40.375-3.5-6.25,58+7,Math.toRadians(180));
+    private final Pose specimen2 = new Pose(40.375-6.25-3.5  ,66+10,Math.toRadians(180));
+    private final Pose specimen3 = new Pose(40.375-3.5-6,61+5,Math.toRadians(180));
+    private final Pose specimen4 = new Pose(40.375-3.5-3.25,58+7,Math.toRadians(180));
 
 
     IntakeOuttakeV2 jamocha = new IntakeOuttakeV2();
@@ -55,7 +54,7 @@ public class MochiesSpecimenAuto extends OpMode {
 
     public void pathBuilder(){
         preload = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(startPose.getX(), startPose.getY()+.5),new Point(scorePose.getX()+.67, scorePose.getY())))
+                .addPath(new BezierLine(new Point(startPose.getX(), startPose.getY()),new Point(scorePose.getX()-.75, scorePose.getY())))
                 .setConstantHeadingInterpolation((startPose.getHeading()))
                 .build();
 
@@ -103,39 +102,39 @@ public class MochiesSpecimenAuto extends OpMode {
                 .build();*/
 
         hang1 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(eatPose), new Point(specimen1.getX()+1.75, specimen1.getY())))
+                .addPath(new BezierLine(new Point(eatPose), new Point(specimen1.getX()-.25, specimen1.getY())))
                 .setConstantHeadingInterpolation(eatPose.getHeading())
                 .build();
 
         eat2 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(specimen1), new Point(eatPose.getX()-2, eatPose.getY()-1)))
+                .addPath(new BezierLine(new Point(specimen1), new Point(eatPose.getX()-1.5, eatPose.getY()-1)))
                 .setConstantHeadingInterpolation(specimen1.getHeading())
                 .setPathEndTimeoutConstraint(125)
                 .build();
 
         hang2 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(eatPose.getX(), eatPose.getY()), new Point(specimen2.getX()+1.5, specimen2.getY())))
+                .addPath(new BezierLine(new Point(eatPose.getX(), eatPose.getY()), new Point(specimen2.getX()-2, specimen2.getY())))
                 .setConstantHeadingInterpolation(eatPose.getHeading())
                 .build();
 
         eat3 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(specimen2), new Point(eatPose3.getX()-3.2, eatPose3.getY()-1.2)))
+                .addPath(new BezierLine(new Point(specimen2), new Point(eatPose3.getX()-2, eatPose3.getY()-1.2)))
                 .setConstantHeadingInterpolation(specimen2.getHeading())
                 .setPathEndTimeoutConstraint(125)
                 .build();
         hang3 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(eatPose3), new Point(specimen3.getX()+1.25, specimen3.getY())))
+                .addPath(new BezierLine(new Point(eatPose3), new Point(specimen3.getX()-1.75, specimen3.getY())))
                 .setConstantHeadingInterpolation(eatPose3.getHeading())
                 .build();
 
         eat4 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(specimen3), new Point(eatPose.getX()-2, eatPose.getY())))
+                .addPath(new BezierLine(new Point(specimen3), new Point(eatPose.getX()-1, eatPose.getY())))
                 .setConstantHeadingInterpolation(specimen3.getHeading())
                 .setPathEndTimeoutConstraint(125)
                 .build();
 
         hang4 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(eatPose), new Point(specimen4.getX()-2.5, specimen4.getY()+7)))
+                .addPath(new BezierLine(new Point(eatPose), new Point(specimen4.getX()-5.25, specimen4.getY()+7)))
                 .setConstantHeadingInterpolation(eatPose.getHeading())
                 .build();
         park = follower.pathBuilder()
@@ -162,7 +161,7 @@ public class MochiesSpecimenAuto extends OpMode {
                 setPathState(10000);
                 break;
             case 10000:
-                if (follower.getCurrentTValue()>.1){
+                if (follower.getCurrentTValue()>.05){
                     jamocha.liftHighChamber();
                     setPathState(100);
                 }
@@ -227,7 +226,7 @@ public class MochiesSpecimenAuto extends OpMode {
                 break;
             case 6:
                 if(!follower.isBusy()){
-                    //follower.setMaxPower(0.90);
+                    follower.setMaxPower(0.90-.05);
                     follower.followPath(samplePush3);
                     setPathState(61);
                 }
@@ -293,7 +292,7 @@ public class MochiesSpecimenAuto extends OpMode {
                 break;
             case 9:
                 if(pathTimer.getElapsedTimeSeconds()>.1){
-                    //follower.setMaxPower(0.85);
+                    follower.setMaxPower(0.85);
                     follower.followPath(eat2);
                     //jamocha.liftStowed();
                     setPathState(911);
@@ -325,7 +324,7 @@ public class MochiesSpecimenAuto extends OpMode {
                 break;
             case 10:
                 if(pathTimer.getElapsedTimeSeconds()>.75){
-                    //follower.setMaxPower(0.95);
+                    follower.setMaxPower(0.95);
                     follower.followPath(hang2);
                     setPathState(1003);
                 }
@@ -359,7 +358,7 @@ public class MochiesSpecimenAuto extends OpMode {
                 break;
             case 11:
                 if(pathTimer.getElapsedTimeSeconds()>.1){
-                    //follower.setMaxPower(0.85);
+                    follower.setMaxPower(0.85);
                     follower.followPath(eat3);
                     //jamocha.liftStowed();
                     setPathState(111);
@@ -390,7 +389,7 @@ public class MochiesSpecimenAuto extends OpMode {
                 break;
             case 12:
                 if(pathTimer.getElapsedTimeSeconds()>.1){
-                    //follower.setMaxPower(0.95);
+                    follower.setMaxPower(0.90);
                     follower.followPath(hang3);
                     setPathState(121);
                 }
@@ -424,10 +423,10 @@ public class MochiesSpecimenAuto extends OpMode {
                 break;
             case 13:
                 if(pathTimer.getElapsedTimeSeconds()>.1){
-                    //follower.setMaxPower(0.95);
-                    follower.followPath(eat4);
+                    follower.setMaxPower(0.95);
+                    follower.followPath(park);
                     //jamocha.liftStowed();
-                    setPathState(130);
+                    setPathState(-1);
                 }
                 break;
             case 130:

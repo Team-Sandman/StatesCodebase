@@ -1,4 +1,4 @@
-package OpModes.Autos;
+package OpModes.Autos.Specimen;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.pedropathing.follower.Follower;
@@ -17,37 +17,37 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import Common.Robot.IntakeOuttakeV2;
 
 
-
-@Autonomous (name = "AAAAAAauto")
+@Autonomous
 @Config
-public class fiveSpecimenAutoBackwards extends OpMode {
+@Disabled
+public class Copy3 extends OpMode {
     private Timer pathTimer;
     private int pathState;
     private Follower follower;
     private Path cyclePos, push1;
     private PathChain samplePush1, goBack1, samplePush2, goBack2, samplePush3, preload, eat1, hang1, eat2, hang2, eat3, hang3, eat4, hang4, park;
-    private final Pose startPose = new Pose(6.7291,67.9626,Math.toRadians(180));//x was 6.7291
-    private final Pose scorePose = new Pose(40.3738-2.25-9,67.9626+.5,Math.toRadians(180));
+    private final Pose startPose = new Pose(6.7291,67.9626,Math.toRadians(0));//x was 6.7291
+    private final Pose scorePose = new Pose(40.3738-2.25,67.9626+.5,Math.toRadians(0));
 
     private final Pose sample1 = new Pose(60.1121-1-2,30.9533+.5,Math.toRadians(180));//was x=66.8411, y=25.7944; then 65.7196,28.4861, then (61.9065,31.4019)
     private final Pose sample1Control = new Pose(5.8318,48.6729,Math.toRadians(180));//was 2.6916,53.1589
     private final Pose observation1 = new Pose(7.4019+3+8, 18.1682+.5, Math.toRadians(180));//was 7.1776, 20.8598
-    private final Pose sample2 = new Pose(57.4206-2.25-2, 18.1682+2, Math.toRadians(180));//was x=68.6355, y=23.3271, then (77.3832, 24.8972), then 69.0841, 20.8598, then (61.0093, 18.3925), then (62.1308, 14.3551), then (60.1121, 17.4953)
-    private final Pose sample2Control = new Pose(54.9533,42.8411+.3,Math.toRadians(180));//was (71.9999,35.6636), then (60.3364,32.9720), then (59.9495,39.5215), then (61.9065,43.2897)
+    private final Pose sample2 = new Pose(57.4206-2.25-2.5, 18.1682+1.75, Math.toRadians(180));//was x=68.6355, y=23.3271, then (77.3832, 24.8972), then 69.0841, 20.8598, then (61.0093, 18.3925), then (62.1308, 14.3551), then (60.1121, 17.4953)
+    private final Pose sample2Control = new Pose(54.9533,42.8411,Math.toRadians(180));//was (71.9999,35.6636), then (60.3364,32.9720), then (59.9495,39.5215), then (61.9065,43.2897)
     private final Pose observation2 = new Pose(9.8692+2+6, 13.0093, Math.toRadians(180));//was (10.5421, 10.7664)
-    private final Pose sample3 = new Pose(57.4206-3.225-1, 10.9907+4.25, Math.toRadians(175+3+1)); //was (x,y)(71.3271, 9.1963), then (71.1028, 10.9907), then (62.8037, 9.4206), then (59.8879, 9.8692), then (59.43925, 10.5421)
+    private final Pose sample3 = new Pose(57.4206-3.225-1, 10.9907+5, Math.toRadians(180)); //was (x,y)(71.3271, 9.1963), then (71.1028, 10.9907), then (62.8037, 9.4206), then (59.8879, 9.8692), then (59.43925, 10.5421)
     private final Pose sample3Control = new Pose(57.1963,25.7944+9,Math.toRadians(180));//was (80.0748,24.4486)
     private final Pose observation3 = new Pose(8.9720+8,10.9907,Math.toRadians(180)); //was (x,y) (9.8692,8.2991), then (10.7664,9.4206), then (10.0935,9.1963)
     //private final Pose geraldPickup = new Pose(10,24,Math.toRadians(180));
-    private final Pose eatPose = new Pose(7+2,24+8,Math.toRadians(170));//was 180
-    private final Pose eatPose3 = new Pose(7+2,24+8,Math.toRadians(170+3));//was 180
+    private final Pose eatPose = new Pose(7+2,24+8,Math.toRadians(180));//was 180
+    private final Pose eatPose3 = new Pose(7+2,24+8,Math.toRadians(180));//was 180
     private final Pose eatPoseControl = new Pose(27.5,18.8,Math.toRadians(180));
-    private final Pose specimen1 = new Pose(40.374-3.5-11.5,70+9,Math.toRadians(180));
+    private final Pose specimen1 = new Pose(40.374-3.5-5.5,70+9,Math.toRadians(180));
     private final Pose specimen1Control = new Pose(33.87,89.72,Math.toRadians(0));
     private final Pose specimen1Control2 = new Pose(17.05, 84.79, Math.toRadians(0));
-    private final Pose specimen2 = new Pose(40.375-6.25-9.5  ,66+12,Math.toRadians(180));
-    private final Pose specimen3 = new Pose(40.375-3.5-12,61+5,Math.toRadians(180));
-    private final Pose specimen4 = new Pose(40.375-3.5-10.25,58+7,Math.toRadians(180));
+    private final Pose specimen2 = new Pose(40.375-6.25-3.5  ,66+10,Math.toRadians(180));
+    private final Pose specimen3 = new Pose(40.375-3.5-6,61+5,Math.toRadians(180));
+    private final Pose specimen4 = new Pose(40.375-3.5-3.25,58+7,Math.toRadians(180));
 
 
     IntakeOuttakeV2 jamocha = new IntakeOuttakeV2();
@@ -55,7 +55,7 @@ public class fiveSpecimenAutoBackwards extends OpMode {
 
     public void pathBuilder(){
         preload = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(startPose.getX(), startPose.getY()+.5),new Point(scorePose.getX()+.67, scorePose.getY())))
+                .addPath(new BezierLine(new Point(startPose.getX(), startPose.getY()),new Point(scorePose.getX()-.75, scorePose.getY())))
                 .setConstantHeadingInterpolation((startPose.getHeading()))
                 .build();
 
@@ -93,7 +93,7 @@ public class fiveSpecimenAutoBackwards extends OpMode {
                 .build();
 
         eat1 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(observation3), new Point(eatPose.getX()-1, eatPose.getY()-8)))
+                .addPath(new BezierCurve(new Point(observation3), new Point(eatPoseControl), new Point(eatPose.getX()-3, eatPose.getY()-2)))
                 .setConstantHeadingInterpolation(observation3.getHeading())
                 .build();
 
@@ -103,39 +103,39 @@ public class fiveSpecimenAutoBackwards extends OpMode {
                 .build();*/
 
         hang1 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(eatPose), new Point(specimen1.getX()+3.5, specimen1.getY()-5)))
+                .addPath(new BezierLine(new Point(eatPose), new Point(specimen1.getX()-.25, specimen1.getY())))
                 .setConstantHeadingInterpolation(eatPose.getHeading())
                 .build();
 
         eat2 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(specimen1), new Point(eatPose.getX(), eatPose.getY()-3)))
+                .addPath(new BezierLine(new Point(specimen1), new Point(eatPose.getX()-1.5, eatPose.getY()-1)))
                 .setConstantHeadingInterpolation(specimen1.getHeading())
                 .setPathEndTimeoutConstraint(125)
                 .build();
 
         hang2 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(eatPose.getX(), eatPose.getY()), new Point(specimen2.getX()+3, specimen2.getY()-4)))
+                .addPath(new BezierLine(new Point(eatPose.getX(), eatPose.getY()), new Point(specimen2.getX()-2, specimen2.getY())))
                 .setConstantHeadingInterpolation(eatPose.getHeading())
                 .build();
 
         eat3 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(specimen2), new Point(eatPose3.getX()-1.2, eatPose3.getY()-1.2)))
+                .addPath(new BezierLine(new Point(specimen2), new Point(eatPose3.getX()-2, eatPose3.getY()-1.2)))
                 .setConstantHeadingInterpolation(specimen2.getHeading())
                 .setPathEndTimeoutConstraint(125)
                 .build();
         hang3 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(eatPose3), new Point(specimen3.getX()+1.25, specimen3.getY()-3)))
+                .addPath(new BezierLine(new Point(eatPose3), new Point(specimen3.getX()-1.75, specimen3.getY())))
                 .setConstantHeadingInterpolation(eatPose3.getHeading())
                 .build();
 
         eat4 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(specimen3), new Point(eatPose.getX(), eatPose.getY()-1)))
+                .addPath(new BezierLine(new Point(specimen3), new Point(eatPose.getX()-1, eatPose.getY())))
                 .setConstantHeadingInterpolation(specimen3.getHeading())
                 .setPathEndTimeoutConstraint(125)
                 .build();
 
         hang4 = follower.pathBuilder()
-                .addPath(new BezierLine(new Point(eatPose), new Point(specimen4.getX()-2, specimen4.getY()+4)))
+                .addPath(new BezierLine(new Point(eatPose), new Point(specimen4.getX()-5.25, specimen4.getY()+7)))
                 .setConstantHeadingInterpolation(eatPose.getHeading())
                 .build();
         park = follower.pathBuilder()
@@ -152,35 +152,21 @@ public class fiveSpecimenAutoBackwards extends OpMode {
                 jamocha.horizontalSlidesHome();
                 jamocha.fourBarPitchStowed();
                 jamocha.fourBarStowed();
-                jamocha.armTurretBackward();
                 //jamocha.liftHighChamber(); //was -1410
                 pathTimer.resetTimer();
                 setPathState(1000);
                 break;
-            /*case 1100:
-                if (pathTimer.getElapsedTimeSeconds()>.5){
-                    jamocha.armTurretBackward();
-                    setPathState(1000);
-                }
-                break;*/
             case 1000:
-                if (pathTimer.getElapsedTimeSeconds()>2)
-                follower.setMaxPower(0.50);
+                //follower.setMaxPower(0.85);
                 follower.followPath(preload, true);
                 setPathState(10000);
                 break;
             case 10000:
-                if (follower.getCurrentTValue()>.1){
+                if (follower.getCurrentTValue()>.05){
                     jamocha.liftHighChamber();
                     setPathState(100);
                 }
                 break;
-            /*case 10001:
-                if (follower.getCurrentTValue()>.01){
-                    jamocha.armTurretBackward();
-                    setPathState(100);
-                }
-                break;*/
             case 100:
                 if(!follower.isBusy()){
                     jamocha.armHorizontal();
@@ -200,7 +186,6 @@ public class fiveSpecimenAutoBackwards extends OpMode {
             case 1:
                 if(!follower.isBusy()){
                     //follower.setMaxPower(0.95);
-                    jamocha.armTurretForward();
                     follower.followPath(push1);
                     setPathState(2);
                 }
@@ -216,7 +201,6 @@ public class fiveSpecimenAutoBackwards extends OpMode {
             case 21:
                 if (follower.getCurrentTValue()>.1){
                     jamocha.liftStowed();
-                    //jamocha.armTurretForward();
                     setPathState(3);
                 }
                 break;
