@@ -8,6 +8,7 @@ import static com.pedropathing.follower.FollowerConstants.rightFrontMotorName;
 import static com.pedropathing.follower.FollowerConstants.rightRearMotorName;
 
 import com.pedropathing.follower.Follower;
+import com.pedropathing.util.Constants;
 import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -15,6 +16,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import Common.Robot.IntakeOuttakeV2;
+import pedroPathing.constants.FConstants;
+import pedroPathing.constants.LConstants;
 
 
 @TeleOp
@@ -105,6 +108,7 @@ public class AdorableJamochaUltimate  extends OpMode {
     State state = State.DRIVE_ARM_BACK;
     @Override
     public void init(){
+        Constants.setConstants(FConstants .class, LConstants .class);
         //teleop driving enhancement initialization
         follower = new Follower(hardwareMap);
 
