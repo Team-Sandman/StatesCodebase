@@ -192,7 +192,7 @@ public class IntakeOuttakeV2 {
 
     public void armChamber (){
         //45 degree to place at chamber
-        OuttakeArm.setPosition(.55-.15);
+        OuttakeArm.setPosition(.55);
     }
 
     public void armStowed (){

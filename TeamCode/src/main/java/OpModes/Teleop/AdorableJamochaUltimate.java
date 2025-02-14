@@ -264,7 +264,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.armTurretForward();
 
                 //arm
-                jamocha.armHorizontal();
+                jamocha.armPickup();
 
                 //claw
                 jamocha.clawOpen();
@@ -300,7 +300,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.armTurretForward(); //?
 
                 //arm
-                jamocha.armHorizontal();
+                jamocha.armPickup();
 
                 //claw
                 jamocha.clawClosed(); //?
