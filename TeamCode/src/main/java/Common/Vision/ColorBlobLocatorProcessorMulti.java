@@ -1,4 +1,4 @@
-package Common.Vision;
+/*package Common.Vision;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,6 +8,7 @@ import android.graphics.Path;
 import androidx.annotation.ColorInt;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.util.SortOrder;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -41,6 +42,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Config
+@Disabled
+
 public class ColorBlobLocatorProcessorMulti extends ColorBlobLocatorProcessor implements VisionProcessor, CameraStreamSource {
     public Mat undistorted;
     public Mat cameraMatrix;
@@ -408,7 +411,7 @@ public class ColorBlobLocatorProcessorMulti extends ColorBlobLocatorProcessor im
             /*
              * Draws a rotated rect by drawing each of the 4 lines individually
              */
-            Point[] rotRectPts = new Point[4];
+            /*Point[] rotRectPts = new Point[4];
             blob.getBoxFit().points(rotRectPts);
 
             for(int i = 0; i < 4; ++i)
@@ -581,3 +584,4 @@ public class ColorBlobLocatorProcessorMulti extends ColorBlobLocatorProcessor im
         }
     }
 }
+*/

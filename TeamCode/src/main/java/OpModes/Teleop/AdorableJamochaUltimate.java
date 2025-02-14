@@ -59,33 +59,41 @@ public class AdorableJamochaUltimate  extends OpMode {
 
         PRE_LOW_BASKET_NEUTRAL,
         PRE_LOW_BASKET_FORWARD,
+        PRE_LOW_BASKET_FORWARD_1,
         SCORE_LOW_BASKET_FORWARD,
         DROP_LOW_BASKET_FORWARD,
         PRE_LOW_BASKET_BACK,
+        PRE_LOW_BASKET_BACK_1,
         SCORE_LOW_BASKET_BACK,
         DROP_LOW_BASKET_BACK,
 
         PRE_HIGH_BASKET_NEUTRAL,
         PRE_HIGH_BASKET_FORWARD,
+        PRE_HIGH_BASKET_FORWARD_1,
         SCORE_HIGH_BASKET_FORWARD,
         DROP_HIGH_BASKET_FORWARD,
         PRE_HIGH_BASKET_BACK,
+        PRE_HIGH_BASKET_BACK_1,
         SCORE_HIGH_BASKET_BACK,
         DROP_HIGH_BASKET_BACK,
 
         PRE_LOW_CHAMBER_NEUTRAL,
         PRE_LOW_CHAMBER_FORWARD,
+        PRE_LOW_CHAMBER_FORWARD_1,
         SCORE_LOW_CHAMBER_FORWARD,
         DROP_LOW_CHAMBER_FORWARD,
         PRE_LOW_CHAMBER_BACK,
+        PRE_LOW_CHAMBER_BACK_1,
         SCORE_LOW_CHAMBER_BACK,
         DROP_LOW_CHAMBER_BACK,
 
         PRE_HIGH_CHAMBER_NEUTRAL,
         PRE_HIGH_CHAMBER_FORWARD,
+        PRE_HIGH_CHAMBER_FORWARD_1,
         SCORE_HIGH_CHAMBER_FORWARD,
         DROP_HIGH_CHAMBER_FORWARD,
         PRE_HIGH_CHAMBER_BACK,
+        PRE_HIGH_CHAMBER_BACK_1,
         SCORE_HIGH_CHAMBER_BACK,
         DROP_HIGH_CHAMBER_BACK,
 
@@ -849,6 +857,37 @@ public class AdorableJamochaUltimate  extends OpMode {
 
                 break;
 
+            case PRE_LOW_BASKET_FORWARD_1:
+                //four bar
+                jamocha.fourBarTransfer();
+                jamocha.fourBarPitchTransfer();
+
+                //intake
+                jamocha.intakeOff();
+
+                //horizontal slides
+                jamocha.horizontalSlidesHome();
+
+                //arm turret
+                jamocha.armTurretForward();
+
+                //arm
+                jamocha.armChamber();
+
+                //claw
+                jamocha.clawClosed();
+
+                //lift
+                jamocha.liftHighChamber();
+
+                TurretStateForward = false;
+
+                if (gamepad2.a){
+                    state = State.SCORE_LOW_BASKET_FORWARD;
+                }
+
+                break;
+
             case SCORE_LOW_BASKET_FORWARD:
                 //four bar
                 jamocha.fourBarTransfer();
@@ -878,7 +917,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                     state = State.DROP_LOW_BASKET_FORWARD;
                 }
                 if (gamepad2.x){
-                    state = State.PRE_LOW_BASKET_FORWARD;
+                    state = State.PRE_LOW_BASKET_FORWARD_1;
                 }
 
                 break;
@@ -951,6 +990,37 @@ public class AdorableJamochaUltimate  extends OpMode {
 
                 break;
 
+            case PRE_LOW_BASKET_BACK_1:
+                //four bar
+                jamocha.fourBarTransfer();
+                jamocha.fourBarPitchTransfer();
+
+                //intake
+                jamocha.intakeOff();
+
+                //horizontal slides
+                jamocha.horizontalSlidesHome();
+
+                //arm turret
+                jamocha.armTurretBackward();
+
+                //arm
+                jamocha.armChamber();
+
+                //claw
+                jamocha.clawClosed();
+
+                //lift
+                jamocha.liftHighChamber();
+
+                TurretStateForward = false;
+
+                if (gamepad2.a){
+                    state = State.SCORE_LOW_BASKET_BACK;
+                }
+
+                break;
+
             case SCORE_LOW_BASKET_BACK:
                 //four bar
                 jamocha.fourBarTransfer();
@@ -981,7 +1051,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                 }
 
                 if (gamepad2.x){
-                    state = State.PRE_LOW_BASKET_BACK;
+                    state = State.PRE_LOW_BASKET_BACK_1;
                 }
 
                 break;
@@ -1097,6 +1167,37 @@ public class AdorableJamochaUltimate  extends OpMode {
 
                 break;
 
+            case PRE_HIGH_BASKET_FORWARD_1:
+                //four bar
+                jamocha.fourBarTransfer();
+                jamocha.fourBarPitchTransfer();
+
+                //intake
+                jamocha.intakeOff();
+
+                //horizontal slides
+                jamocha.horizontalSlidesHome();
+
+                //arm turret
+                jamocha.armTurretForward();
+
+                //arm
+                jamocha.armChamber();
+
+                //claw
+                jamocha.clawClosed();
+
+                //lift
+                jamocha.liftHighChamber();
+
+                TurretStateForward = false;
+
+                if (gamepad2.a){
+                    state = State.SCORE_HIGH_CHAMBER_FORWARD;
+                }
+
+                break;
+
             case SCORE_HIGH_BASKET_FORWARD:
                 //four bar
                 jamocha.fourBarTransfer();
@@ -1126,7 +1227,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                     state = State.DROP_HIGH_BASKET_FORWARD;
                 }
                 if (gamepad2.x){
-                    state = State.PRE_HIGH_BASKET_FORWARD;
+                    state = State.PRE_HIGH_BASKET_FORWARD_1;
                 }
 
                 break;
@@ -1199,6 +1300,37 @@ public class AdorableJamochaUltimate  extends OpMode {
 
                 break;
 
+            case PRE_HIGH_BASKET_BACK_1:
+                //four bar
+                jamocha.fourBarTransfer();
+                jamocha.fourBarPitchTransfer();
+
+                //intake
+                jamocha.intakeOff();
+
+                //horizontal slides
+                jamocha.horizontalSlidesHome();
+
+                //arm turret
+                jamocha.armTurretBackward();
+
+                //arm
+                jamocha.armChamber();
+
+                //claw
+                jamocha.clawClosed();
+
+                //lift
+                jamocha.liftHighChamber();
+
+                TurretStateForward = false;
+
+                if (gamepad2.a){
+                    state = State.SCORE_HIGH_BASKET_BACK;
+                }
+
+                break;
+
             case SCORE_HIGH_BASKET_BACK:
                 //four bar
                 jamocha.fourBarTransfer();
@@ -1229,7 +1361,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                 }
 
                 if (gamepad2.x){
-                    state = State.PRE_HIGH_BASKET_BACK;
+                    state = State.PRE_HIGH_BASKET_BACK_1;
                 }
 
                 break;
@@ -1300,7 +1432,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.clawClosed();
 
                 //lift
-                jamocha.liftLowChamber();
+                jamocha.liftStowed();
 
                 TurretStateForward = true;
 
@@ -1309,6 +1441,37 @@ public class AdorableJamochaUltimate  extends OpMode {
                 }
                 if (gamepad2.b){
                     state = State.PRE_LOW_CHAMBER_BACK;
+                }
+
+                break;
+
+            case PRE_LOW_CHAMBER_FORWARD_1:
+                //four bar
+                jamocha.fourBarTransfer();
+                jamocha.fourBarPitchTransfer();
+
+                //intake
+                jamocha.intakeOff();
+
+                //horizontal slides
+                jamocha.horizontalSlidesHome();
+
+                //arm turret
+                jamocha.armTurretForward();
+
+                //arm
+                jamocha.armChamber();
+
+                //claw
+                jamocha.clawClosed();
+
+                //lift
+                jamocha.liftStowed();
+
+                TurretStateForward = false;
+
+                if (gamepad2.a){
+                    state = State.SCORE_LOW_CHAMBER_FORWARD;
                 }
 
                 break;
@@ -1328,13 +1491,13 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.armTurretForward();
 
                 //arm
-                jamocha.armHorizontal();
+                jamocha.armPickup();
 
                 //claw
                 jamocha.clawClosed();
 
                 //lift
-                jamocha.liftLowChamber();
+                jamocha.liftStowed();
 
                 TurretStateForward = true;
 
@@ -1342,7 +1505,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                     state = State.DROP_LOW_CHAMBER_FORWARD;
                 }
                 if (gamepad2.x){
-                    state = State.PRE_LOW_CHAMBER_FORWARD;
+                    state = State.PRE_LOW_CHAMBER_FORWARD_1;
                 }
 
                 break;
@@ -1362,13 +1525,13 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.armTurretForward();
 
                 //arm
-                jamocha.armHorizontal();
+                jamocha.armPickup();
 
                 //claw
                 jamocha.clawOpen();
 
                 //lift
-                jamocha.liftLowChamber();
+                jamocha.liftStowed();
 
                 TurretStateForward = true;
 
@@ -1402,7 +1565,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.clawClosed();
 
                 //lift
-                jamocha.liftLowChamber();
+                jamocha.liftStowed();
 
                 TurretStateForward = false;
 
@@ -1411,6 +1574,37 @@ public class AdorableJamochaUltimate  extends OpMode {
                 }
                 if (gamepad2.a){
                     state = State.PRE_LOW_CHAMBER_FORWARD;
+                }
+
+                break;
+
+            case PRE_LOW_CHAMBER_BACK_1:
+                //four bar
+                jamocha.fourBarTransfer();
+                jamocha.fourBarPitchTransfer();
+
+                //intake
+                jamocha.intakeOff();
+
+                //horizontal slides
+                jamocha.horizontalSlidesHome();
+
+                //arm turret
+                jamocha.armTurretBackward();
+
+                //arm
+                jamocha.armChamber();
+
+                //claw
+                jamocha.clawClosed();
+
+                //lift
+                jamocha.liftStowed();
+
+                TurretStateForward = false;
+
+                if (gamepad2.a){
+                    state = State.SCORE_LOW_CHAMBER_BACK;
                 }
 
                 break;
@@ -1430,13 +1624,13 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.armTurretBackward();
 
                 //arm
-                jamocha.armHorizontal();//?
+                jamocha.armPickup();//?
 
                 //claw
                 jamocha.clawClosed();
 
                 //lift
-                jamocha.liftLowChamber();
+                jamocha.liftStowed();
 
                 TurretStateForward = false;
 
@@ -1445,7 +1639,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                 }
 
                 if (gamepad2.x){
-                    state = State.PRE_LOW_CHAMBER_BACK;
+                    state = State.PRE_LOW_CHAMBER_BACK_1;
                 }
 
                 break;
@@ -1465,14 +1659,13 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.armTurretBackward();
 
                 //arm
-                jamocha.armHorizontal();
+                jamocha.armPickup();
 
                 //claw
                 jamocha.clawOpen();
 
                 //lift
-                jamocha.liftLowChamber();
-
+                jamocha.liftStowed();
                 TurretStateForward = false;
 
                 if (gamepad2.a){
@@ -1561,6 +1754,37 @@ public class AdorableJamochaUltimate  extends OpMode {
 
                 break;
 
+            case PRE_HIGH_CHAMBER_FORWARD_1:
+                //four bar
+                jamocha.fourBarTransfer();
+                jamocha.fourBarPitchTransfer();
+
+                //intake
+                jamocha.intakeOff();
+
+                //horizontal slides
+                jamocha.horizontalSlidesHome();
+
+                //arm turret
+                jamocha.armTurretForward();
+
+                //arm
+                jamocha.armChamber();
+
+                //claw
+                jamocha.clawClosed();
+
+                //lift
+                jamocha.liftHighChamber();
+
+                TurretStateForward = false;
+
+                if (gamepad2.a){
+                    state = State.SCORE_HIGH_CHAMBER_FORWARD;
+                }
+
+                break;
+
             case SCORE_HIGH_CHAMBER_FORWARD:
                 //four bar
                 jamocha.fourBarTransfer();
@@ -1590,7 +1814,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                     state = State.DROP_HIGH_CHAMBER_FORWARD;
                 }
                 if (gamepad2.x){
-                    state = State.PRE_HIGH_CHAMBER_FORWARD;
+                    state = State.PRE_HIGH_CHAMBER_FORWARD_1;
                 }
 
                 break;
@@ -1665,6 +1889,37 @@ public class AdorableJamochaUltimate  extends OpMode {
 
                 break;
 
+            case PRE_HIGH_CHAMBER_BACK_1:
+                //four bar
+                jamocha.fourBarTransfer();
+                jamocha.fourBarPitchTransfer();
+
+                //intake
+                jamocha.intakeOff();
+
+                //horizontal slides
+                jamocha.horizontalSlidesHome();
+
+                //arm turret
+                jamocha.armTurretBackward();
+
+                //arm
+                jamocha.armChamber();
+
+                //claw
+                jamocha.clawClosed();
+
+                //lift
+                jamocha.liftHighChamber();
+
+                TurretStateForward = false;
+
+                if (gamepad2.a){
+                    state = State.SCORE_HIGH_CHAMBER_BACK;
+                }
+
+                break;
+
             case SCORE_HIGH_CHAMBER_BACK:
                 //four bar
                 jamocha.fourBarTransfer();
@@ -1695,7 +1950,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                 }
 
                 if (gamepad2.x){
-                    state = State.PRE_HIGH_CHAMBER_BACK;
+                    state = State.PRE_HIGH_CHAMBER_BACK_1;
                 }
 
                 break;

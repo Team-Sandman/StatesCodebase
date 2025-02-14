@@ -184,6 +184,12 @@ public class IntakeOuttakeV2 {
         OuttakeArm.setPosition(.7);
     }
 
+    public void autoArmPickup (){
+        //for pick up on wall either side
+        //higher number = further up
+        OuttakeArm.setPosition(.7+.05);
+    }
+
     public void armChamber (){
         //45 degree to place at chamber
         OuttakeArm.setPosition(.55-.15);
