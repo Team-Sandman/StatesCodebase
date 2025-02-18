@@ -6,6 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.Camera;
+import org.firstinspires.ftc.vision.VisionPortal;
+
 public class IntakeOuttakeV2 {
 
     // Four Bar Servos (Control Hub Ports 2 [FourBarLeft], 3 [FourBarRight], 4[FourBarPitch]
@@ -39,7 +42,9 @@ public class IntakeOuttakeV2 {
     //Vertical Slides Motor ( Expansion Hub Port 1)
     private DcMotorEx VerticalSlides;
 
-
+    //Camera
+    private Camera Fisheye;
+    private VisionPortal camera;
 
     public void initIntake(HardwareMap hwMap){
         FourBarLeft = hwMap.get(Servo.class, "FourBarLeft");
@@ -284,6 +289,9 @@ public class IntakeOuttakeV2 {
         } else {
             return false;
         }
+
+    }
+    public void initFisheye(){
 
     }
 }
