@@ -61,7 +61,7 @@ public class IntakeOuttakeV2 {
         IntakeRotate.setPosition(0);
     }
     //Spit out Sample
-    public void intakeOut(){
+    public void intakeOut() {
         IntakeClaw.setPosition(0); //was-.1
         IntakeRotate.setPosition(0); //was+.1
     }
