@@ -18,9 +18,12 @@ import org.firstinspires.ftc.robotcore.external.stream.CameraStreamSource;
 import org.firstinspires.ftc.robotcore.internal.camera.calibration.CameraCalibration;
 import org.firstinspires.ftc.vision.VisionProcessor;
 import org.firstinspires.ftc.vision.opencv.ColorBlobLocatorProcessor;
-import org.firstinspires.ftc.vision.opencv.ColorRange;
-import org.firstinspires.ftc.vision.opencv.ColorSpace;
-import org.firstinspires.ftc.vision.opencv.ImageRegion;
+//import org.firstinspires.ftc.vision.opencv.ColorRange;
+import Common.Vision.ColorRange;
+import Common.Vision.ColorSpace;
+import Common.Vision.ImageRegion;
+//import org.firstinspires.ftc.vision.opencv.ColorSpace;
+//import org.firstinspires.ftc.vision.opencv.ImageRegion;
 import org.opencv.android.Utils;
 import org.opencv.calib3d.Calib3d;
 import org.opencv.core.Core;
@@ -109,7 +112,8 @@ public class ColorBlobLocatorProcessorMulti extends ColorBlobLocatorProcessor im
                 new ColorRange[] {
                         ColorRange.YELLOW,
                         ColorRange.BLUE,
-                        ColorRange.RED,
+                        ColorRange.RED_LOWER,
+                        ColorRange.RED_HIGHER
                 }
         );
     }
