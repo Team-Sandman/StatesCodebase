@@ -11,7 +11,7 @@ import org.firstinspires.ftc.vision.VisionPortal;
 
 public class IntakeOuttakeV2 {
 
-    // Four Bar Servos (Control Hub Ports 2 [FourBarLeft], 3 [FourBarRight], 4[FourBarPitch]
+    // Four Bar Servos (Control Hub Ports 2 [FourBarLeft], 3 [FourBarRight], 4[FourBarPitch] a
     private Servo FourBarLeft;
 
     private Servo FourBarRight;
