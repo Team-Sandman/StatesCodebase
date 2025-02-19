@@ -12,6 +12,7 @@ import org.firstinspires.ftc.vision.VisionPortal;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 
+import Common.Robot.CVMaster;
 import Common.Vision.ColorBlobLocatorProcessorMulti;
 import Common.Vision.ColorRange;
 import Common.Vision.ColorSpace;
@@ -20,26 +21,26 @@ import Common.Vision.ImageRegion;
 @Config
 @TeleOp
 public class VisionTesting extends LinearOpMode {
-private ColorBlobLocatorProcessorMulti sampleLocatorProcessor;
-private VisionPortal camera;
-
+    private CVMaster cvMaster;
 
     @Override
     public void runOpMode() throws InterruptedException {
-    camera = (VisionPortal) hardwareMap.get(WebcamName.class, "Webcam 1");
-    sampleLocatorProcessor = new ColorBlobLocatorProcessorMulti();
 
-   /*              portal = new VisionPortal().Builder()
-                .addProcessor(sampleLocatorProcessor)
-                .setCamera(camera)
-                .setStreamFormat(VisionPortal.StreamFormat.YUY2)
-                .setCameraResolution(new Size(640, 480))
-                .enableLiveView(true)
-                .build();
-        setEnabled(false);
+        cvMaster = new CVMaster();
 
-*/
+
+        boolean exposureSuccess = cvMaster.waitForSetExposure(3000, 5000, 65);
+        telemetry.addData("Exposure success?", exposureSuccess);
+        telemetry.update();
+
+        // Wait for the driver to press PLAY
+        waitForStart();
+
+        while (opModeIsActive()) {
+            cvMaster.setEnabled(true);
+            telemetry.update();
+        }
+
+
     }
-
-
 }
