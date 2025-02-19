@@ -17,9 +17,9 @@ public class IntakeOuttakeV2 {
 
 
     // Intake Servos (Control Hub Ports 0 [IntakeLeft], 1 [IntakeRight])
-    private CRServo IntakeLeft;
+    private Servo IntakeClaw;
 
-    private CRServo IntakeRight;
+    private Servo IntakeRotate;
 
 
     // Horizontal Slides Motor (Expansion Hub Port 0)
@@ -46,8 +46,8 @@ public class IntakeOuttakeV2 {
         FourBarRight = hwMap.get(Servo.class, "FourBarRight");
         FourBarPitch = hwMap.get(Servo.class, "FourBarPitch");
 
-        IntakeLeft = hwMap.get(CRServo.class, "IntakeLeft");
-        IntakeRight = hwMap.get(CRServo.class, "IntakeRight");
+        IntakeClaw = hwMap.get(Servo.class, "IntakeClaw");
+        IntakeRotate = hwMap.get(Servo.class, "IntakeRotate");
 
         HorizontalSlides = hwMap.get(DcMotorEx.class, "HorizontalSlides");
 
@@ -57,18 +57,22 @@ public class IntakeOuttakeV2 {
     }
     //Intake Sample
     public void intakeIn(){
-        IntakeLeft.setPower(1);
-        IntakeRight.setPower(-1);
+        IntakeClaw.setPosition(1);
+        IntakeRotate.setPosition(0);
     }
     //Spit out Sample
     public void intakeOut(){
-        IntakeLeft.setPower(-.25); //was-.1
-        IntakeRight.setPower(.25); //was+.1
+        IntakeClaw.setPosition(0); //was-.1
+        IntakeRotate.setPosition(0); //was+.1
     }
     //Turn intake off
     public void intakeOff(){
-        IntakeLeft.setPower(0);
-        IntakeRight.setPower(0);
+        IntakeClaw.setPosition(0);
+        IntakeRotate.setPosition(0);
+    }
+    public void setIntakeRotate(){
+        IntakeClaw.setPosition(0);
+        IntakeRotate.setPosition(0);
     }
     //Lower four bar to intake sample
     public void fourBarDown(){
@@ -175,13 +179,13 @@ public class IntakeOuttakeV2 {
     public void armHorizontal (){
         //for pick up on wall either side
         //higher number = further up
-        OuttakeArm.setPosition(.7-.05);
+        OuttakeArm.setPosition(.7-.05+.05);
     }
 
     public void armPickup (){
         //for pick up on wall either side
         //higher number = further up
-        OuttakeArm.setPosition(.7);
+        OuttakeArm.setPosition(.7+.035);
     }
 
     public void autoArmPickup (){
@@ -192,7 +196,7 @@ public class IntakeOuttakeV2 {
 
     public void armChamber (){
         //45 degree to place at chamber
-        OuttakeArm.setPosition(.55);
+        OuttakeArm.setPosition(.55-.1);
     }
 
     public void armStowed (){
