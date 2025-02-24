@@ -52,7 +52,7 @@ public class FConstants {
 
         FollowerConstants.useVoltageCompensationInAuto = true;
         FollowerConstants.useVoltageCompensationInTeleOp = false;
-        FollowerConstants.nominalVoltage = 13.25;
+        FollowerConstants.nominalVoltage = 13.05;//was 13.25
         FollowerConstants.cacheInvalidateSeconds = 0.5;
 
         FollowerConstants.useBrakeModeInTeleOp = true;

@@ -61,8 +61,15 @@ public class IntakeOuttakeV2 {
         HorizontalSlides.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
     //Intake Sample
-    public void intakeIn(){
-        IntakeClaw.setPosition(1);
+    public void intakeOpen(){
+       // IntakeClaw.setPosition(.5);
+        IntakeRotate.setPosition(.5);
+    }
+
+    public void intakeRotateManual(double chomp){
+        IntakeClaw.setPosition(chomp);
+    }
+    public void intakeClosed(){
         IntakeRotate.setPosition(0);
     }
     //Spit out Sample
@@ -72,18 +79,28 @@ public class IntakeOuttakeV2 {
     }
     //Turn intake off
     public void intakeOff(){
-        IntakeClaw.setPosition(0);
-        IntakeRotate.setPosition(0);
+        IntakeClaw.setPosition(.5);
+       // IntakeRotate.setPosition(0);
     }
-    public void setIntakeRotate(){
-        IntakeClaw.setPosition(0);
-        IntakeRotate.setPosition(0);
+    public void IntakeRotateStart(){
+        IntakeRotate.setPosition(.1);
     }
+
+    public void intakeRotateWall(){
+        IntakeClaw.setPosition(.3);
+    }
+
     //Lower four bar to intake sample
     public void fourBarDown(){
-        FourBarLeft.setPosition(0);//was.09
-        FourBarRight.setPosition(1);//was.47
+        FourBarLeft.setPosition(.1);//was.09
+        FourBarRight.setPosition(.9);//was.47
     }
+
+    public void fourBarUp(){
+        FourBarLeft.setPosition(.1+.1);//was.09
+        FourBarRight.setPosition(.9-.1);//was.47
+    }
+
     //Extend four bar to search for sample
     public void fourBarSearch(){
         FourBarLeft.setPosition(.1+.05);//was .19
@@ -91,26 +108,28 @@ public class IntakeOuttakeV2 {
     }
 
     public void fourBarTransfer(){
-        FourBarLeft.setPosition(.2+.025-.05);
-        FourBarRight.setPosition(.8-.025+.05);
+        FourBarLeft.setPosition(.2-0.1);
+        FourBarRight.setPosition(.8+.1);
     }
 
     //Retract four bar
     public void fourBarStowed(){
-        FourBarLeft.setPosition(.26);//was .35
-        FourBarRight.setPosition(.74);//was .2
+        FourBarLeft.setPosition(.19);//was .35
+        FourBarRight.setPosition(.81);//was .2
     }
 
 
     public void fourBarPitchSearch(){
-        FourBarPitch.setPosition(.2-.03);
+        FourBarPitch.setPosition(/*.2-.03-.1*/0);
     }
 
     public void fourBarPitchStowed(){
         FourBarPitch.setPosition(.65);
     }
     public void fourBarPitchTransfer(){
-        FourBarPitch.setPosition(.75+.075);
+      //  FourBarPitch.setPosition(.75+.075-.075);
+        //Higher number = more towards sky
+        FourBarPitch.setPosition(.33+.02);
     }
     public void fourBarPitchStart (){
         FourBarPitch.setPosition(.7);
@@ -174,7 +193,7 @@ public class IntakeOuttakeV2 {
 
     public void armTransfer (){
         //this will change based on how it gets attached
-        OuttakeArm.setPosition(.95);
+        OuttakeArm.setPosition(1);//akeArm..setPosition(1);
     }
 
     /*public void armScore(){
@@ -183,14 +202,14 @@ public class IntakeOuttakeV2 {
 
     public void armHorizontal (){
         //for pick up on wall either side
-        //higher number = further up
+        //higher number = further down
         OuttakeArm.setPosition(.7-.05+.05);
     }
 
     public void armPickup (){
         //for pick up on wall either side
-        //higher number = further up
-        OuttakeArm.setPosition(.7+.035);
+        //lower number = further up
+        OuttakeArm.setPosition(.7+.0375);
     }
 
     public void autoArmPickup (){
@@ -201,7 +220,7 @@ public class IntakeOuttakeV2 {
 
     public void armChamber (){
         //45 degree to place at chamber
-        OuttakeArm.setPosition(.55-.1);
+    OuttakeArm.setPosition(.55-.1);
     }
 
     public void armStowed (){
@@ -231,7 +250,7 @@ public class IntakeOuttakeV2 {
         VerticalSlides.setPower(.35);
     }
     public void liftTransfer(){
-        VerticalSlides.setTargetPosition(-450);
+        VerticalSlides.setTargetPosition(-575);
         VerticalSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         VerticalSlides.setPower(.5);
     }
@@ -278,7 +297,7 @@ public class IntakeOuttakeV2 {
     }
 
     public void liftPreTransfer(){
-        VerticalSlides.setTargetPosition(-600);
+        VerticalSlides.setTargetPosition(-750);
         VerticalSlides.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         VerticalSlides.setPower(.5);
     }

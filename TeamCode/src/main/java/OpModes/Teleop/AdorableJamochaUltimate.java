@@ -52,9 +52,12 @@ public class AdorableJamochaUltimate  extends OpMode {
         SPECIMEN_TO_FORWARD_2,
 
         INTAKE_SEARCH,
+        INTAKE_TO_SEARCH,
+        INTAKE_SEARCH_CLOSED,
         INTAKE_EXPEL,
         INTAKE_GRAB,
         INTAKE_RETRACT,
+        INTAKE_RETRACT_1,
         INTAKE_TRANSFER_1,
         INTAKE_TRANSFER_2,
         INTAKE_TRANSFER_3,
@@ -159,8 +162,8 @@ public class AdorableJamochaUltimate  extends OpMode {
                 }
             case DRIVE_ARM_BACK:
                 //four bar
-                jamocha.fourBarTransfer();
-                jamocha.fourBarPitchTransfer();
+                jamocha.fourBarStowed();
+                jamocha.fourBarPitchSearch();
 
                 //intake
                 jamocha.intakeOff();
@@ -173,6 +176,8 @@ public class AdorableJamochaUltimate  extends OpMode {
 
                 //arm
                 jamocha.armChamber();
+
+                jamocha.IntakeRotateStart();
 
                 //claw
 
@@ -221,6 +226,8 @@ public class AdorableJamochaUltimate  extends OpMode {
 
                 //arm
                 jamocha.armChamber();
+
+                jamocha.IntakeRotateStart();
 
                 //claw
 
@@ -523,10 +530,12 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.fourBarPitchSearch();
 
                 //intake
-                jamocha.intakeOff();
+                jamocha.intakeOpen();
 
                 //horizontal slides
                 jamocha.horizontalSlidesManualControl(gamepad2.left_stick_y);
+
+                jamocha.intakeRotateManual((gamepad2.right_stick_x+1)*.5);
 
                 //arm turret
                 jamocha.armTurretBackward();
@@ -566,7 +575,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.fourBarPitchSearch();
 
                 //intake
-                jamocha.intakeOut();
+                jamocha.intakeOpen();
 
                 //horizontal slides
                 jamocha.horizontalSlidesManualControl(gamepad2.left_stick_y);
@@ -598,7 +607,45 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.fourBarPitchSearch();
 
                 //intake
-                jamocha.intakeIn();
+                //jamocha.intakeOff();
+                jamocha.intakeClosed();
+
+                //horizontal slides
+                jamocha.horizontalSlidesManualControl(gamepad2.left_stick_y);
+
+                //arm turret
+                jamocha.armTurretBackward();
+                jamocha.armTransfer();
+
+                //arm
+                jamocha.armTransfer();
+
+                //claw
+                jamocha.clawOpen();
+
+                //lift
+                //jamocha.liftSwing();
+                jamocha.liftPreTransfer();
+
+                TurretStateForward = false;
+
+                if (gamepad2.left_trigger <.1){
+                    state = State.INTAKE_TO_SEARCH;
+                }
+                if(gamepad2.y){
+                    state = State.INTAKE_EXPEL;
+                }
+
+                break;
+
+            case INTAKE_TO_SEARCH:
+                //four bar
+                jamocha.fourBarSearch();
+                jamocha.fourBarPitchSearch();
+
+                //intake
+                //jamocha.intakeOff();
+                jamocha.intakeClosed();
 
                 //horizontal slides
                 jamocha.horizontalSlidesManualControl(gamepad2.left_stick_y);
@@ -619,18 +666,101 @@ public class AdorableJamochaUltimate  extends OpMode {
                 TurretStateForward = false;
 
                 if (gamepad2.left_trigger <.1){
+                    state = State.INTAKE_SEARCH_CLOSED;
+                }
+
+                break;
+
+            case INTAKE_SEARCH_CLOSED:
+                //four bar
+                jamocha.fourBarUp();
+                jamocha.fourBarPitchSearch();
+
+                //intake
+                //jamocha.intakeOff();
+                jamocha.intakeClosed();
+
+                jamocha.intakeOff();
+
+                //horizontal slides
+                jamocha.horizontalSlidesManualControl(gamepad2.left_stick_y);
+
+                //arm turret
+                jamocha.armTurretBackward();
+
+                //arm
+                jamocha.armTransfer();
+
+                //claw
+                jamocha.clawOpen();
+
+                //lift
+                //jamocha.liftSwing();
+
+                jamocha.liftPreTransfer();
+
+                TurretStateForward = false;
+
+
+                if (gamepad2.x){
+                    state = State.INTAKE_EXPEL;
+                }
+
+                if (gamepad2.left_bumper){
                     state = State.INTAKE_SEARCH;
                 }
+
+                if (gamepad2.a){
+                    state = State.INTAKE_RETRACT_1;
+                }
+                if (gamepad2.b){
+                    state = State.DRIVE_ARM_BACK;
+                }
+
+                break;
+
+            case INTAKE_RETRACT_1:
+                //four bar
+                jamocha.fourBarSearch();
+                jamocha.fourBarPitchTransfer();
+
+                //intake
+                //jamocha.intakeOff();
+                jamocha.intakeClosed();
+
+                //horizontal slides
+                jamocha.horizontalSlidesHome();
+
+                //arm turret
+                jamocha.armTurretBackward();
+
+                //arm
+                jamocha.armTransfer();
+
+                //claw
+                jamocha.clawOpen();
+
+                //lift
+                //jamocha.liftSwing();
+                jamocha.liftPreTransfer();
+
+                TurretStateForward = false;
+
+                if (gamepad2.a){
+                    state = State.INTAKE_RETRACT;
+                }
+
 
                 break;
 
             case INTAKE_RETRACT:
                 //four bar
-                jamocha.fourBarTransfer();
+                jamocha.fourBarSearch();
                 jamocha.fourBarPitchTransfer();
 
                 //intake
-                jamocha.intakeOff();
+                //jamocha.intakeOff();
+                jamocha.intakeClosed();
 
                 //horizontal slides
                 jamocha.horizontalSlidesHome();
@@ -661,11 +791,11 @@ public class AdorableJamochaUltimate  extends OpMode {
 
             case INTAKE_TRANSFER_1:
                 //four bar
-                jamocha.fourBarTransfer();
+                jamocha.fourBarSearch();
                 jamocha.fourBarPitchTransfer();
 
                 //intake
-                jamocha.intakeOut();
+                jamocha.intakeClosed();
 
                 //horizontal slides
                 jamocha.horizontalSlidesHome();
@@ -681,8 +811,8 @@ public class AdorableJamochaUltimate  extends OpMode {
 
                 //lift
                 //jamocha.liftSwing();
+                //jamocha.liftTransfer();
                 jamocha.liftPreTransfer();
-
                 TurretStateForward = false;
 
                 if (gamepad2.a){
@@ -693,11 +823,11 @@ public class AdorableJamochaUltimate  extends OpMode {
 
             case INTAKE_TRANSFER_2:
                 //four bar
-                jamocha.fourBarTransfer();
+                jamocha.fourBarSearch();
                 jamocha.fourBarPitchTransfer();
 
                 //intake
-                jamocha.intakeOut();
+                jamocha.intakeOpen();
 
                 //horizontal slides
                 jamocha.horizontalSlidesHome();
@@ -709,9 +839,10 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.armTransfer();
 
                 //claw
-                jamocha.clawOpen();
+                jamocha.clawClosed();
 
                 //lift
+                //was lift transfer
                 jamocha.liftTransfer();
 
                 TurretStateForward = false;
@@ -724,11 +855,11 @@ public class AdorableJamochaUltimate  extends OpMode {
 
             case INTAKE_TRANSFER_3:
                 //four bar
-                jamocha.fourBarTransfer();
+                jamocha.fourBarSearch();
                 jamocha.fourBarPitchTransfer();
 
                 //intake
-                jamocha.intakeOut();
+                jamocha.intakeOpen();
 
                 //horizontal slides
                 jamocha.horizontalSlidesHome();
@@ -743,6 +874,7 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.clawClosed();
 
                 //lift
+                //was lift transfer
                 jamocha.liftTransfer();
 
                 TurretStateForward = false;
@@ -755,11 +887,11 @@ public class AdorableJamochaUltimate  extends OpMode {
 
             case INTAKE_TRANSFER_4:
                 //four bar
-                jamocha.fourBarTransfer();
+                jamocha.fourBarSearch();
                 jamocha.fourBarPitchTransfer();
 
                 //intake
-                jamocha.intakeOut();
+                jamocha.intakeOpen();
 
                 //horizontal slides
                 jamocha.horizontalSlidesHome();
@@ -768,13 +900,14 @@ public class AdorableJamochaUltimate  extends OpMode {
                 jamocha.armTurretBackward();
 
                 //arm
-                jamocha.armTransfer();
+                jamocha.armChamber();
 
                 //claw
                 jamocha.clawClosed();
 
                 //lift
-                jamocha.liftSwing();
+                //waslift pretrasnfer
+                jamocha.liftTransfer();
 
                 TurretStateForward = false;
 

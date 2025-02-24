@@ -19,7 +19,7 @@ public class ColorRange {
         this.max = max;
     }
     static {
-        BLUE = new ColorRange(ColorSpace.HSV, new Scalar(85,150,70) , new Scalar(125,255,255));
+        BLUE = new ColorRange(ColorSpace.HSV, new Scalar(100,150,70) , new Scalar(140,255,255));
         RED_LOWER = new ColorRange(ColorSpace.HSV, new Scalar(0,60,50) , new Scalar(10,255,255));
         RED_HIGHER = new ColorRange(ColorSpace.HSV, new Scalar(170,60,50) , new Scalar(180,255,255));
         YELLOW = new ColorRange(ColorSpace.HSV, new Scalar(12,60,50) , new Scalar(50,255,255));

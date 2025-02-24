@@ -27,17 +27,16 @@ public class CVMaster {
     public static final ColorRange RED_HIGHER;
     public static final ColorRange YELLOW;
     WebcamName fisheye;
-    HardwareMap hardwareMap;
 
     VisionPortal portal;
 
     ColorBlobLocatorProcessorMulti sampleDetector;
     DashboardCameraStreamProcessor dashboardCameraStreamProcessor = new DashboardCameraStreamProcessor();
 
-    public static int exposureMillis = 65;
+    public static int exposureMillis = 65-20;
 
-    public CVMaster(){
-      fisheye = hardwareMap.get(WebcamName.class, "Webcam 1");
+    public CVMaster(HardwareMap map){
+      fisheye = map.get(WebcamName.class, "Webcam 1");
       sampleDetector = new ColorBlobLocatorProcessorMulti();
 
       portal = new VisionPortal.Builder()
@@ -48,14 +47,15 @@ public class CVMaster {
               .enableLiveView(true)
               .build();
 
-        FtcDashboard.getInstance().startCameraStream(dashboardCameraStreamProcessor, 30);
+        FtcDashboard.getInstance().startCameraStream(sampleDetector, 30);
     }
 
     static {
-        BLUE = new ColorRange(ColorSpace.HSV, new Scalar(85,150,70) , new Scalar(125,255,255));
+        BLUE = new ColorRange(ColorSpace.HSV, new Scalar(100,150,70) , new Scalar(140,255,255));
         RED_LOWER = new ColorRange(ColorSpace.HSV, new Scalar(0,60,50) , new Scalar(10,255,255));
         RED_HIGHER = new ColorRange(ColorSpace.HSV, new Scalar(170,60,50) , new Scalar(180,255,255));
         YELLOW = new ColorRange(ColorSpace.HSV, new Scalar(12,60,50) , new Scalar(50,255,255));
+        //THIS IS WHERE WE GET THE COLOR BLOBBING UP AND RUNNING!!!!!
     }
 
     public void setEnabled(boolean enable) {

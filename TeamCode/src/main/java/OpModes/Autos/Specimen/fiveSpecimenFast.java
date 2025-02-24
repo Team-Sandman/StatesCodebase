@@ -23,7 +23,7 @@ import Common.Robot.IntakeOuttakeV2;
 
 @Autonomous
 @Config
-public class Copy1 extends OpMode {
+public class fiveSpecimenFast extends OpMode {
     private Timer pathTimer;
     private int pathState;
     private Follower follower;

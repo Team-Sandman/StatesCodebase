@@ -69,9 +69,9 @@ public class ColorBlobLocatorProcessorMulti extends ColorBlobLocatorProcessor im
     private final @ColorInt int roiColor;
     private final @ColorInt int contourColor;
 
-    public static int preDSize = 13;
-    public static int postESize = 97;
-    public static int postDSize = 13;
+    public static int preDSize = 20;
+    public static int postESize = 110;
+    public static int postDSize = 25;
 
     private final Mat preDilateElement;
     private final Mat erodeElement;
@@ -129,6 +129,7 @@ public class ColorBlobLocatorProcessorMulti extends ColorBlobLocatorProcessor im
                 Color.rgb(255, 120, 31),
                 Color.rgb(255, 255, 255),
                 Color.rgb(3, 227, 252)
+                //where we might change the numbers...;
         );
     }
 
